@@ -1,31 +1,28 @@
 import { BrowserRouter, Switch, Route } from "react-router-dom";
 
-import React, { useState } from "react";
+import React from "react";
 import Login from "pages/Login";
 import Carrinho from "pages/Carrinho";
 import Feira from "pages/Feira";
-import { UserContext } from "common/context/User";
+import UserProvider from "common/context/User";
 
 const Router = () => {
-  const [name, setName] = useState("");
-  const [balance, setBalance] = useState(0);
-
   return (
-    <BrowserRouter>
-      <Switch>
-        <Route exact path="/">
-          <UserContext.Provider value={{ name, setName, balance, setBalance }}>
+    <UserProvider>
+      <BrowserRouter>
+        <Switch>
+          <Route exact path="/">
             <Login />
-          </UserContext.Provider>
-        </Route>
-        <Route path="/carrinho">
-          <Carrinho />
-        </Route>
-        <Route path="/feira">
-          <Feira />
-        </Route>
-      </Switch>
-    </BrowserRouter>
+          </Route>
+          <Route path="/carrinho">
+            <Carrinho />
+          </Route>
+          <Route path="/feira">
+            <Feira />
+          </Route>
+        </Switch>
+      </BrowserRouter>
+    </UserProvider>
   );
 };
 
