@@ -4,6 +4,7 @@ import React, { useState } from "react";
 import Login from "pages/Login";
 import Carrinho from "pages/Carrinho";
 import Feira from "pages/Feira";
+import { UserContext } from "common/context/User";
 
 const Router = () => {
   const [name, setName] = useState("");
@@ -13,12 +14,9 @@ const Router = () => {
     <BrowserRouter>
       <Switch>
         <Route exact path="/">
-          <Login
-            name={name}
-            setName={setName}
-            balance={balance}
-            setBalance={setBalance}
-          />
+          <UserContext.Provider value={{ name, setName, balance, setBalance }}>
+            <Login />
+          </UserContext.Provider>
         </Route>
         <Route path="/carrinho">
           <Carrinho />
