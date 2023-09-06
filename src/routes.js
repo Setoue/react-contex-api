@@ -5,24 +5,27 @@ import Login from "pages/Login";
 import Carrinho from "pages/Carrinho";
 import Feira from "pages/Feira";
 import UserProvider from "common/context/User";
+import { CartProvider } from "common/context/Cart";
 
 const Router = () => {
   return (
-    <UserProvider>
-      <BrowserRouter>
-        <Switch>
-          <Route exact path="/">
-            <Login />
-          </Route>
-          <Route path="/carrinho">
-            <Carrinho />
-          </Route>
-          <Route path="/feira">
-            <Feira />
-          </Route>
-        </Switch>
-      </BrowserRouter>
-    </UserProvider>
+    <BrowserRouter>
+      <Switch>
+        <CartProvider>
+          <UserProvider>
+            <Route exact path="/">
+              <Login />
+            </Route>
+            <Route path="/feira">
+              <Feira />
+            </Route>
+            <Route path="/carrinho">
+              <Carrinho />
+            </Route>
+          </UserProvider>
+        </CartProvider>
+      </Switch>
+    </BrowserRouter>
   );
 };
 

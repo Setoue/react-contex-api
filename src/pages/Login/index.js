@@ -33,6 +33,7 @@ function Login() {
         />
       </InputContainer>
       <Button
+        disabled={name.length < 3}
         variant="contained"
         color="primary"
         onClick={(e) => {
