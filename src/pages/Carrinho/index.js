@@ -16,13 +16,13 @@ import {
 import { useCartContext } from "common/hooks/useCartContext";
 import Produto from "components/Produto";
 import { useHistory } from "react-router-dom/cjs/react-router-dom.min";
-import { PaymentContext } from "common/context/Payment";
+import { usePaymentContext } from "common/hooks/usePaymentContext";
 
 function Carrinho() {
   const [openSnackbar, setOpenSnackbar] = useState(false);
   const { cart } = useCartContext();
   const history = useHistory();
-  const { typePayment, payment, setPayment } = useContext(PaymentContext);
+  const { typePayment, payment, toChangeFormPayment } = usePaymentContext();
   return (
     <Container>
       <Voltar
@@ -36,7 +36,10 @@ function Carrinho() {
       ))}
       <PagamentoContainer>
         <InputLabel> Forma de Pagamento</InputLabel>
-        <Select value={payment.id} onChange={(e) => setPayment(e.target.value)}>
+        <Select
+          value={payment.id}
+          onChange={(e) => toChangeFormPayment(e.target.value)}
+        >
           {typePayment.map((type) => {
             return (
               <MenuItem value={type.id} key={type.id}>
