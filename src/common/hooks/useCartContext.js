@@ -1,8 +1,9 @@
 import { CartContext } from "common/context/Cart";
-import { useContext } from "react";
+import { useContext, useEffect } from "react";
 
 export const useCartContext = () => {
-  const { cart, setCart } = useContext(CartContext);
+  const { cart, setCart, amountProduct, setAmountProduct } =
+    useContext(CartContext);
 
   const changeAmount = (id, amount) => {
     return cart.map((item) => {
@@ -29,5 +30,11 @@ export const useCartContext = () => {
     }
     setCart(changeAmount(id, -1));
   };
-  return { cart, setCart, addProduct, removeProduct };
+
+  useEffect(() => {
+    const amount = cart.reduce((count, product) => count + product.unidade, 0);
+    setAmountProduct(amount);
+  }, [cart, setAmountProduct]);
+
+  return { cart, setCart, addProduct, removeProduct, amountProduct };
 };
