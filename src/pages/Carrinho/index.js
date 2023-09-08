@@ -1,4 +1,10 @@
-import { Button, Snackbar, InputLabel } from "@material-ui/core";
+import {
+  Button,
+  Snackbar,
+  InputLabel,
+  Select,
+  MenuItem,
+} from "@material-ui/core";
 import MuiAlert from "@material-ui/lab/Alert";
 import { useContext, useState } from "react";
 import {
@@ -29,7 +35,16 @@ function Carrinho() {
         <Produto {...product} key={product.id} />
       ))}
       <PagamentoContainer>
-        <InputLabel> Forma de Pagamento {payment.nome}</InputLabel>
+        <InputLabel> Forma de Pagamento</InputLabel>
+        <Select value={payment.id} onChange={(e) => setPayment(e.target.value)}>
+          {typePayment.map((type) => {
+            return (
+              <MenuItem value={type.id} key={type.id}>
+                {type.nome}
+              </MenuItem>
+            );
+          })}
+        </Select>
       </PagamentoContainer>
       <TotalContainer>
         <div>
