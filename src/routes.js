@@ -14,13 +14,13 @@ const Router = () => {
       <Switch>
         <CartProvider>
           <UserProvider>
-            <Route exact path="/">
-              <Login />
-            </Route>
-            <Route path="/feira">
-              <Feira />
-            </Route>
             <PaymentProvider>
+              <Route exact path="/">
+                <Login />
+              </Route>
+              <Route path="/feira">
+                <Feira />
+              </Route>
               <Route path="/carrinho">
                 <Carrinho />
               </Route>
